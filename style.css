@@ -1,0 +1,9 @@
+/* #bookTable {
+    border: 1px solid black;
+} */
+
+table, th, td, tr {
+        padding: 10px;
+        border: 1px solid black;
+        border-collapse: collapse;
+      }

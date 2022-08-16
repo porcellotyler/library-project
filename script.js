@@ -1,48 +1,71 @@
-let myLibrary = [];
+var myLibrary = [];
 
 function Book(title, author, pages, read) {
     this.title = title
     this.author = author
     this.pages = pages
     this.read = read
-    this.info = function() {
-       return title + ' by ' + author + ', ' + pages + ' pages, ' + read
-    } 
     return
 }
 
 function addBookToLibrary(book) {
     myLibrary.push(book);
-    console.log(myLibrary);
 
-    let tableBody = document.getElementById("tableBody");tableBody.innerHTML = "";
+    let list = document.getElementById("bookContainer");
+        list.innerText = "";
 
     createTable(myLibrary);
     return 
 }
 
-const nonfiction = new Book('memoir', 'ty pee', '253', 'read');
+//test book below
+/*const nonfiction = new Book('memoir', 'ty pee', '253', 'read');
     addBookToLibrary(nonfiction);
+*/
 
 function createTable(library){
     for (let i = 0; i < library.length; i++) {
-        console.table(library);
+        let list = document.getElementById("bookContainer");
 
-        let table = document.getElementById("tableBody")
+        let bookCard = document.createElement('div');
+            bookCard.innerText = "Book Information:"
+            list.prepend(bookCard);
 
-        let row = table.insertRow();
-        let title = row.insertCell(0);
-        title.innerText = library[i].title;
-        
-        let author = row.insertCell(1);
-        author.innerText = library[i].author;
+        let title = document.createElement('div');
+            title.innerText = `Title: ${library[i].title}`;
+            bookCard.append(title);
 
-        let pages = row.insertCell(2);
-        pages.innerText = library[i].pages;
+        let author = document.createElement('div');
+            author.innerText = `Author: ${library[i].author}`;
+            bookCard.append(author);
 
-        let read = row.insertCell(3);
-        read.innerText = library[i].read;
+        let pages = document.createElement('div');
+            pages.innerText = `Pages: ${library[i].pages}`;
+            bookCard.append(pages);
+
+        let read = document.createElement('div');
+            read.innerText = `Read yet: ${library[i].read}`;
+            bookCard.append(read);
+
+        let deleteBtn = document.createElement('button');
+            deleteBtn.innerText = "Delete";
+            deleteBtn.classList.add(`book-${i}`)
+            deleteBtn.onclick = () => {
+                removeBookFromArray(`${i}`); 
+                let location = deleteBtn.parentNode;
+                location.innerHTML = "";
+            };
+            bookCard.append(deleteBtn);
     };
+};
+
+function removeBookFromArray(locationID) {
+    console.log(locationID);
+    
+    //remove book from array
+    let removefromLib = myLibrary.splice(locationID, 1)
+            console.log(removefromLib);
+            console.log(myLibrary);
 };
 
 const addBook = document.getElementById("newBookButton")

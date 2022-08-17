@@ -6,7 +6,7 @@ function Book(title, author, pages, read) {
     this.pages = pages
     this.read = read
     return
-}
+};
 
 function addBookToLibrary(book) {
     myLibrary.push(book);
@@ -18,16 +18,12 @@ function addBookToLibrary(book) {
     return 
 }
 
-//test book below
-/*const nonfiction = new Book('memoir', 'ty pee', '253', 'read');
-    addBookToLibrary(nonfiction);
-*/
-
 function createTable(library){
     for (let i = 0; i < library.length; i++) {
         let list = document.getElementById("bookContainer");
 
         let bookCard = document.createElement('div');
+            bookCard.classList.add('bookCard');
             bookCard.innerText = "Book Information:"
             list.prepend(bookCard);
 
@@ -43,9 +39,37 @@ function createTable(library){
             pages.innerText = `Pages: ${library[i].pages}`;
             bookCard.append(pages);
 
-        let read = document.createElement('div');
+        /*let read = document.createElement('div');
             read.innerText = `Read yet: ${library[i].read}`;
-            bookCard.append(read);
+            bookCard.append(read); */
+
+        let checkBoxLabel = document.createElement('label');
+            checkBoxLabel.htmlFor = "readYet";
+            checkBoxLabel.appendChild(document.createTextNode("Have you read it yet?"));
+            bookCard.append(checkBoxLabel);
+        
+            let checkBox = document.createElement('input');
+            checkBox.type = "checkbox";
+            checkBox.name = "readYet";
+            checkBox.value = "readYet";
+            checkBox.id = "readYet";
+            checkBox.setAttribute('id', 'checkBox');
+            checkBox.onchange = () => {
+                if (checkBox.checked === true) {
+                        console.log("true")
+                    library[i].read = "true";
+                        console.log(library[i]);
+                        console.table(myLibrary);
+                        return
+                } else {
+                        console.log("false")
+                    library[i].read = "false";
+                        console.log(library[i]);
+                        console.table(myLibrary);
+                        return
+                };
+            };
+            bookCard.append(checkBox);
 
         let deleteBtn = document.createElement('button');
             deleteBtn.innerText = "Delete";
@@ -71,13 +95,13 @@ function removeBookFromArray(locationID) {
 const addBook = document.getElementById("newBookButton")
 
 addBook.onclick = function() {
-    let newBook = new Book((document.getElementById("title").value), (document.getElementById("author").value), (document.getElementById("pages").value), (document.getElementById("readYet").value)
+    let newBook = new Book((document.getElementById("title").value), (document.getElementById("author").value), (document.getElementById("pages").value), /*(document.getElementById("readYet").value)*/ "false"
     );
 
     document.getElementById("title").value = '';
     document.getElementById("author").value = '';
     document.getElementById("pages").value = '';
-    document.getElementById("readYet").value = '';
+    /*document.getElementById("readYet").value = '';*/
 
     return addBookToLibrary(newBook)
-}
+};

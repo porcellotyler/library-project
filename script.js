@@ -1,12 +1,22 @@
 var myLibrary = [];
 
-function Book(title, author, pages, read) {
+/* function Book(title, author, pages, read) {
     this.title = title
     this.author = author
     this.pages = pages
     this.read = read
     return
-};
+}; */
+
+class Book {
+    constructor(title, author, pages, read) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
+    }
+}
+
 
 function addBookToLibrary(book) {
     myLibrary.push(book);
@@ -97,7 +107,7 @@ const addBook = document.getElementById("newBookButton")
 addBook.onclick = function() {
     let newBook = new Book((document.getElementById("title").value), (document.getElementById("author").value), (document.getElementById("pages").value), /*(document.getElementById("readYet").value)*/ "false"
     );
-
+    
     document.getElementById("title").value = '';
     document.getElementById("author").value = '';
     document.getElementById("pages").value = '';

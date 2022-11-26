@@ -104,7 +104,31 @@ function removeBookFromArray(locationID) {
 
 const addBook = document.getElementById("newBookButton")
 
-addBook.onclick = function() {
+/* function checkForm() {
+    const titleInput = document.getElementById('title');
+    const authorInput = document.getElementById('author');
+    const pagesInput = document.getElementById('pages');
+
+    if (!titleInput.checkValidity()) {
+        document.getElementById('messageContainer').innerHTML = titleInput.validationMessage;
+    }
+} */
+
+addBook.onclick = function () {
+    document.getElementById('messageContainer').innerHTML = '';
+    
+    const titleInput = document.getElementById('title');
+    const authorInput = document.getElementById('author');
+    const pagesInput = document.getElementById('pages');
+
+    if (!titleInput.checkValidity()) {
+        return document.getElementById('messageContainer').innerHTML = titleInput.validationMessage;
+    } else if (!authorInput.checkValidity()) {
+        return document.getElementById('messageContainer').innerHTML = authorInput.validationMessage;
+    } else if (!pagesInput.checkValidity()) {
+        return document.getElementById('messageContainer').innerHTML = pagesInput.validationMessage;
+    }
+
     let newBook = new Book((document.getElementById("title").value), (document.getElementById("author").value), (document.getElementById("pages").value), /*(document.getElementById("readYet").value)*/ "false"
     );
     
